@@ -1,0 +1,14 @@
+---
+- name: Install Supervisor
+  apt: name=supervisor state=present update_cache=yes
+
+- name: Supervisor | Setting config file supervisord.conf
+  template: src=devops.conf dest=/etc/supervisor/conf.d/
+
+- name: reread supervisor process conf file
+  command: supervisorctl reread
+
+- name: add process in process group
+  command: supervisorctl add {{ process_name }}
+- name: start devopsapp process
+  command: supervisorctl start {{ process_name }}

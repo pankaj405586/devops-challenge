@@ -1,0 +1,2 @@
+stderr_logfile: /var/log/devops/app.err.log
+stdout_logfile: /var/log/devops/app.out.log

@@ -1,0 +1,3 @@
+---
+- name: install needed packages from requirements.txt
+  command: 'pip install -r /webapps/devops/requirements.txt'

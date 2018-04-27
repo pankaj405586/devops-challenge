@@ -1,0 +1,19 @@
+- name: removing default nginx conf file
+  file: path=/etc/nginx/sites-enabled/default state=absent
+
+- name: add nginx conf to site available location
+  template:
+        src: www.devops.com
+        dest: "/etc/nginx/sites-available/{{ app_name }}"
+
+- name: create link
+  become: true
+  file:
+    src: "/etc/nginx/sites-available/{{ app_name }}"
+    dest: "/etc/nginx/sites-enabled/{{ app_name }}"
+    state: link
+
+- name: relaod nginx
+  service:
+       name: nginx
+       state: reloaded

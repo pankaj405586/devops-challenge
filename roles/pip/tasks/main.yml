@@ -1,0 +1,21 @@
+---
+- name: Create directory
+  file:
+    path: /webapps/devops
+    state: directory
+    owner: vagrant
+    group: vagrant
+    mode: 0777
+    recurse: yes
+
+- name: create directiry for application log
+  file:
+    path: /var/log/devops
+    state: directory
+    owner: vagrant
+    group: vagrant
+    mode: 0777
+    recurse: yes
+
+- name: install pip
+  apt: name=python-pip state=present update_cache=yes

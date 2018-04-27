@@ -1,0 +1,10 @@
+---
+- name: install git
+  apt: name=git-core state=present update_cache=yes
+
+- name: cloning repo
+  git:
+    repo: https://bitbucket.org/azneita/devops-challenge.git
+    dest: /webapps/devops/
+    clone: yes
+    update: yes

@@ -1,0 +1,5 @@
+- name: update timezone file
+  shell: echo "Etc/UTC" > /etc/timezone
+
+- name : set new timestamp
+  command: 'dpkg-reconfigure --frontend noninteractive tzdata'

@@ -1,0 +1,28 @@
+- name: create directory for log rotation conf file
+  file:
+    path: /usr/local/bin/scripts
+    state: directory
+    owner: root
+    group: root
+    mode: 0777
+    recurse: yes
+
+
+- name: configuring log rotation
+  template: src=logrotate-treebo.conf dest=/usr/local/bin/scripts/ owner=root group=root mode=0755
+
+- name: copy script that call run logrotate
+  copy:
+    src: call-logrotate.sh
+    dest: /usr/local/bin/scripts/
+    owner: root
+    group: root
+    mode: 0755
+
+- name: confgiure cron for log roation script
+  cron:
+    name: Log rotation for logstash,kibana and elastic search
+    minute: "00"
+    hour: "05"
+    user: "root"
+    job: "/bin/bash /usr/local/bin/scripts/call-logrotate.sh"

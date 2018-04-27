@@ -1,0 +1,13 @@
+- name: Add Nginx Repository
+  apt_repository: repo='ppa:nginx/stable' state=present
+  register: ppainstalled
+
+- name: Install Nginx
+  apt: pkg=nginx state=latest update_cache=true cache_valid_time=600
+  when: ppainstalled|success
+
+  notify:
+    - Start Nginx
+
+- name: Make Nginx service rebootsafe
+  shell: sudo update-rc.d nginx defaults

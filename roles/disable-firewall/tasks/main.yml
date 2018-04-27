@@ -1,0 +1,5 @@
+- name: stop service fw
+  service: name=nginx state=stopped
+
+- name: disable fw service
+  command: 'ufw disable'
